@@ -29,9 +29,10 @@ group :development do
 end
 group :development, :test do
   gem 'factory_girl_rails'
-  gem 'faker'
+  gem 'ffaker'
   gem 'pry-rails'
   gem 'pry-rescue'
+  gem 'rspec-benchmark'
   gem 'rspec-rails'
   gem 'rubocop'
 end
