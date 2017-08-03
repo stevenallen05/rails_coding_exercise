@@ -14,10 +14,12 @@
 ActiveRecord::Schema.define(version: 20170801174506) do
 
   create_table "payments", force: :cascade do |t|
-    t.string   "item"
-    t.decimal  "purchase_price"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "item",           limit: 255
+    t.decimal  "purchase_price",             precision: 16, scale: 2
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
   end
+
+  add_index "payments", ["purchase_price"], name: "index_payments_on_purchase_price", using: :btree
 
 end

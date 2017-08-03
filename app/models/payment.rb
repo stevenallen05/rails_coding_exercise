@@ -6,10 +6,10 @@ class Payment < ActiveRecord::Base
             total += pmt.purchase_price
             count += 1
         end
-        total/count
+        total / count
     end
     
-    def self.improved_average
-
+    def self.improved_get_average
+        #Implement an improved average
     end
 end

@@ -1,20 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe Payment, type: :model do
-  before { 
-      create_list :payment, 100, item: 'foo', purchase_price: 9.50
-      create_list :payment, 100, item: 'bar', purchase_price: 10.50
+  before(:all) { 
+      create_list :payment, 10_000, item: 'foo', purchase_price: 9
+      create_list :payment, 10_000, item: 'bar', purchase_price: 11
   }
   
-  it "calculates the average faster than the baseline" do
-      expect{ Payment.get_average }.to perform_slower_than {
-        total = 0.00
-        count = 0
-        Payment.all.each do |pmt|
-            total += pmt.purchase_price
-            count += 1
-        end
-        total/count
-      }.at_least(10).times
+  it "calculates the average" do
+      expect(Payment.improved_get_average).to eq Payment.get_average
+  end
+  
+  describe "performance difference" do
+      let(:original_benchmark) { Benchmark.measure { Payment.get_average } }
+      let(:improved_benchmark) { Benchmark.measure { Payment.improved_get_average } }
+      
+      it "performs faster by at least 6 orders of magnitude" do
+          expect(improved_benchmark.total).to be <= (original_benchmark.total / 1_000_000)
+      end
   end
 end
