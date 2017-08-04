@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Payment, type: :model do
   before(:all) { 
-      create_list :payment, 10_000, item: 'foo', purchase_price: 9
-      create_list :payment, 10_000, item: 'bar', purchase_price: 11
+    count = 10_000
+    create_list :payment, count, item: 'foo', purchase_price: 9
+    create_list :payment, count, item: 'bar', purchase_price: 11
   }
   
   it "calculates the average" do
