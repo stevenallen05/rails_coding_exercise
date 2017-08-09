@@ -2,6 +2,9 @@
 
 source 'https://rubygems.org'
 ruby '2.4.1'
+
+gem 'dotenv-rails', groups: [:development, :test]
+
 gem 'coffee-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
