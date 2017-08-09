@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe PaymentsController, type: :controller do
   let(:valid_attributes) { attributes_for :payment }
 
-  let(:invalid_attributes) { {item: nil} }
+  let(:invalid_attributes) { { item: "", purchase_price: nil } }
 
   describe "GET #index" do
     it "assigns all payments as @payments" do
@@ -74,7 +74,7 @@ RSpec.describe PaymentsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_item) { "some_garbage_item" }
-      let(:new_attributes) { valid_attributes.merge(name: new_item) }
+      let(:new_attributes) { valid_attributes.merge(item: new_item) }
 
       it "updates the requested payment" do
         payment = Payment.create! valid_attributes

@@ -21,15 +21,24 @@ class PaymentsController < ApplicationController
   # GET /payments/1/edit
   def edit; end
 
+  def is_number?(object)
+    true if Float(object) rescue false
+  end
+
   # POST /payments
   # POST /payments.json
   def create
     @payment = Payment.new(payment_params)
 
     respond_to do |format|
-      if @payment.save
-        format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
-        format.json { render :show, status: :created, location: @payment }
+      if @payment.item != nil && !@payment.item.blank? && @payment.purchase_price != nil && is_number?(@payment.purchase_price)
+        if @payment.save
+          format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
+          format.json { render :show, status: :created, location: @payment }
+        else
+          format.html { render :new }
+          format.json { render json: @payment.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :new }
         format.json { render json: @payment.errors, status: :unprocessable_entity }
@@ -41,12 +50,17 @@ class PaymentsController < ApplicationController
   # PATCH/PUT /payments/1.json
   def update
     respond_to do |format|
-      if @payment.update(payment_params)
-        format.html { redirect_to @payment, notice: 'Payment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @payment }
+      if payment_params[:item] != nil && !payment_params[:item].blank? && payment_params[:purchase_price] != nil && is_number?(payment_params[:purchase_price])
+        if @payment.update(payment_params)
+          format.html { redirect_to @payment, notice: 'Payment was successfully updated.' }
+          format.json { render :show, status: :ok, location: @payment }
+        else
+          format.html { render :edit }
+          format.json { render json: @payment.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :edit }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
+          format.html { render :edit }
+          format.json { render json: @payment.errors, status: :unprocessable_entity }
       end
     end
   end
