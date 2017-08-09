@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 ruby '2.4.1'
-gem 'rails', '5.1.2'
+gem 'coffee-rails'
+gem 'jbuilder', '~> 2.0'
+gem 'jquery-rails'
 gem 'mysql2'
+gem 'rails', '5.1.2'
 gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'jbuilder', '~> 2.0'
 
 group :development do
-  gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'web-console', '~> 2.0'
 end
-gem 'therubyracer', :platform=>:ruby
+gem 'therubyracer', platform: :ruby
 group :development do
   gem 'better_errors'
   gem 'foreman'
@@ -20,9 +22,9 @@ group :development do
   gem 'guard-rails'
   gem 'guard-rspec'
   gem 'rails_layout'
-  gem 'rb-fchange', :require=>false
-  gem 'rb-fsevent', :require=>false
-  gem 'rb-inotify', :require=>false
+  gem 'rb-fchange', require: false
+  gem 'rb-fsevent', require: false
+  gem 'rb-inotify', require: false
   gem 'spring-commands-rspec'
 end
 group :development, :test do

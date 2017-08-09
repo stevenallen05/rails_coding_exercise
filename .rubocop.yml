@@ -1,5 +1,6 @@
 AllCops:
-  RunRailsCops: true
+  Rails:
+    Enabled: true
   Include:
     - '**/Gemfile'
     - '**/Rakefile'
@@ -8,3 +9,4 @@ AllCops:
    - 'db/seeds.rb'
    - 'db/schema.rb'
    - 'vendor/bundle/**/*'
+   - 'config/**/*'
