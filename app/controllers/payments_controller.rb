@@ -31,7 +31,7 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(payment_params)
 
     respond_to do |format|
-      if @payment.item != nil && !@payment.item.blank? && @payment.purchase_price != nil && is_number?(@payment.purchase_price)
+      if @payment.item != nil && !@payment.item.blank? && @payment.purchase_price != nil && is_number?(payment_params[:purchase_price])
         if @payment.save
           format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
           format.json { render :show, status: :created, location: @payment }

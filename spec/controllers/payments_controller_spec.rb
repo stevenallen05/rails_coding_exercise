@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe PaymentsController, type: :controller do
   let(:valid_attributes) { attributes_for :payment }
 
-  let(:invalid_attributes) { { item: "", purchase_price: nil } }
+  # let(:invalid_attributes) { { item: "", purchase_price: nil } }
 
   describe "GET #index" do
     it "assigns all payments as @payments" do
@@ -60,11 +60,29 @@ RSpec.describe PaymentsController, type: :controller do
 
     context "with invalid params" do
       it "assigns a newly created but unsaved payment as @payment" do
+        invalid_attributes = { item: "", purchase_price: nil } 
+        post :create, params: {payment: invalid_attributes}
+        expect(assigns(:payment)).to be_a_new(Payment)
+        
+        invalid_attributes = { item: "Junk", purchase_price: "not a number" } 
+        post :create, params: {payment: invalid_attributes}
+        expect(assigns(:payment)).to be_a_new(Payment)
+        
+        invalid_attributes = { item: "", purchase_price: 1 } 
         post :create, params: {payment: invalid_attributes}
         expect(assigns(:payment)).to be_a_new(Payment)
       end
 
       it "re-renders the 'new' template" do
+        invalid_attributes = { item: "", purchase_price: nil } 
+        post :create, params: {payment: invalid_attributes}
+        expect(response).to render_template("new")
+        
+        invalid_attributes = { item: "Junk", purchase_price: "not a number" } 
+        post :create, params: {payment: invalid_attributes}
+        expect(response).to render_template("new")
+        
+        invalid_attributes = { item: "", purchase_price: 1 } 
         post :create, params: {payment: invalid_attributes}
         expect(response).to render_template("new")
       end
@@ -100,12 +118,32 @@ RSpec.describe PaymentsController, type: :controller do
     context "with invalid params" do
       it "assigns the payment as @payment" do
         payment = Payment.create! valid_attributes
+        
+        invalid_attributes = { item: "", purchase_price: nil } 
+        put :update, params: {id: payment.to_param, payment: invalid_attributes}
+        expect(assigns(:payment)).to eq(payment)
+        
+        invalid_attributes = { item: "Junk", purchase_price: "not a number" } 
+        put :update, params: {id: payment.to_param, payment: invalid_attributes}
+        expect(assigns(:payment)).to eq(payment)
+        
+        invalid_attributes = { item: "", purchase_price: 1 } 
         put :update, params: {id: payment.to_param, payment: invalid_attributes}
         expect(assigns(:payment)).to eq(payment)
       end
 
       it "re-renders the 'edit' template" do
         payment = Payment.create! valid_attributes
+        
+        invalid_attributes = { item: "", purchase_price: nil } 
+        put :update, params: {id: payment.to_param, payment: invalid_attributes}
+        expect(response).to render_template("edit")
+        
+        invalid_attributes = { item: "Junk", purchase_price: "not a number" } 
+        put :update, params: {id: payment.to_param, payment: invalid_attributes}
+        expect(response).to render_template("edit")
+        
+        invalid_attributes = { item: "", purchase_price: 1 } 
         put :update, params: {id: payment.to_param, payment: invalid_attributes}
         expect(response).to render_template("edit")
       end
