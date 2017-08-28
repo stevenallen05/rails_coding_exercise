@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module FizzBuzzHelper
-  def generate(n)
+  def generate_fizzbuzz(n)
     # Implement a method to satisfy the tests in fizz_buzz_helper_spec.rb
 
     # FizzBuzz rules:

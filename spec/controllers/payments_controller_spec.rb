@@ -5,8 +5,6 @@ require "rails_helper"
 RSpec.describe PaymentsController, type: :controller do
   let(:valid_attributes) { attributes_for :payment }
 
-  # let(:invalid_attributes) { { item: "", purchase_price: nil } }
-
   describe "GET #index" do
     it "assigns all payments as @payments" do
       payment = create :payment
