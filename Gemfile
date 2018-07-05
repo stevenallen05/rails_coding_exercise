@@ -19,6 +19,7 @@ group :development do
 end
 gem 'therubyracer', platform: :ruby
 group :development do
+  gem 'annotate'
   gem 'better_errors'
   gem 'foreman'
   gem 'guard-bundler'
