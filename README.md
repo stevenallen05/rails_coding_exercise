@@ -2,6 +2,8 @@ Simple coding exercises for job interview pair sessions.
 
 Uses ruby 2.4.1 and Rails 5.1 with Rspec. Guard is configured for simplicity.
 
+I welcome PRs, forks, issues, etc.
+
 ### Challenges
 
 
